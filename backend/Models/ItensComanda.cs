@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace backend.Models
 {
     public class ItensComanda
@@ -12,6 +7,6 @@ namespace backend.Models
         public int QuantidadeItem { get; set; }
         public decimal PrecoItem { get; set; }
 
-        public Comanda Comanda { get; set; }
+        public Comanda? Comanda { get; set; }
     }
 }
