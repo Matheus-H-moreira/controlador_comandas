@@ -1,0 +1,23 @@
+CREATE TABLE Mesa(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    numero INT NOT NULL,
+    clientes INT NOT NULL,
+    status ENUM('livre', 'ocupada') DEFAULT 'livre'
+);
+
+CREATE TABLE Comandas(
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    MesaId INT NOT NULL,
+    NomeCliente VARCHAR(100) NOT NULL,
+
+    FOREIGN KEY (MesaId) REFERENCES Mesa(id) ON DELETE CASCADE
+);
+
+CREATE TABLE ItensComanda(
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    ComandaId INT NOT NULL,
+    Item VARCHAR(100) NOT NULL,
+    Quantidade INT NOT NULL,
+    Preco DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (ComandaId) REFERENCES Comandas(Id) ON DELETE CASCADE
+);
