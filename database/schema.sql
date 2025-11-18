@@ -1,4 +1,4 @@
-CREATE TABLE Mesa(
+CREATE TABLE Mesas(
     id INT PRIMARY KEY AUTO_INCREMENT,
     numero INT NOT NULL,
     clientes INT NOT NULL,
@@ -19,5 +19,6 @@ CREATE TABLE ItensComanda(
     Item VARCHAR(100) NOT NULL,
     Quantidade INT NOT NULL,
     Preco DECIMAL(10,2) NOT NULL,
+    
     FOREIGN KEY (ComandaId) REFERENCES Comandas(Id) ON DELETE CASCADE
 );
