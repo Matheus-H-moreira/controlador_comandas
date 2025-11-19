@@ -1,16 +1,16 @@
 CREATE TABLE Mesas(
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    numero INT NOT NULL,
-    clientes INT NOT NULL,
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    NumeroMesa INT NOT NULL,
+    QuantidadeClientes INT NOT NULL,
     status ENUM('livre', 'ocupada') DEFAULT 'livre'
 );
 
 CREATE TABLE Comandas(
     Id INT PRIMARY KEY AUTO_INCREMENT,
-    MesaId INT NOT NULL,
+    MesaNum INT NOT NULL,
     NomeCliente VARCHAR(100) NOT NULL,
 
-    FOREIGN KEY (MesaId) REFERENCES Mesa(id) ON DELETE CASCADE
+    FOREIGN KEY (MesaNum) REFERENCES Mesa(NumeroMesa) ON DELETE CASCADE
 );
 
 CREATE TABLE ItensComanda(
