@@ -22,3 +22,10 @@ CREATE TABLE ItensComanda(
     
     FOREIGN KEY (ComandaId) REFERENCES Comandas(Id) ON DELETE CASCADE
 );
+
+CREATE TABLE Produtos (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    Nome VARCHAR(100) NOT NULL,
+    Preco DECIMAL(10,2) NOT NULL,
+    Categoria VARCHAR(50)
+);
