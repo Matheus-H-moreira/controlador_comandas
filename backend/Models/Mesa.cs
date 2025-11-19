@@ -6,5 +6,7 @@ namespace backend.Models
         public int NumeroMesa { get; set; }
         public int QuantidadeClientes { get; set; }
         public string? StatusMesa { get; set; }
+
+        public List<Comanda>? Comandas { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace backend.Models
         public decimal PrecoItem { get; set; }
 
         public Comanda? Comanda { get; set; }
+        public List<ItensComanda>? Itens { get; set; }
     }
 }
