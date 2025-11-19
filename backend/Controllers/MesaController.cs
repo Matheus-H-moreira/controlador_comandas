@@ -56,7 +56,6 @@ namespace backend.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(mesa);
-        
         }
     }
 }

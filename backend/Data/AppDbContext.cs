@@ -10,5 +10,6 @@ namespace backend.Data
         public DbSet<Mesa> Mesas { get; set; }
         public DbSet<Comanda> Comandas { get; set; }
         public DbSet<ItensComanda> ItensComanda { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
     }
 }
