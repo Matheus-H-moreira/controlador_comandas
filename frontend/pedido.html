@@ -9,6 +9,9 @@
 <body>
     <header>
         <h1 onclick="navigateTo('index.html')" style="cursor: pointer;">Senhoras Burguer - Atendente</h1>
+        <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema" title="Alternar entre tema claro e escuro" type="button">
+            <span id="themeIcon">🌙</span>
+        </button>
     </header>
 
     <div class="container">
@@ -46,29 +49,15 @@
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="selectProduto">Produto:</label>
-                    <select id="selectProduto">
-                        <option value="">-- Selecione um produto --</option>
-                    </select>
+                <div style="margin-top: 2rem;">
+                    <h3>Cardápio</h3>
+                    <div id="cardapioContainer"></div>
                 </div>
-
-                <div class="form-group">
-                    <label for="quantidadeProduto">Quantidade:</label>
-                    <input type="number" id="quantidadeProduto" min="1" value="1">
-                </div>
-
-                <div class="form-group">
-                    <label for="observacao">Observação (opcional):</label>
-                    <textarea id="observacao" placeholder="Ex: Sem cebola, bem passado..."></textarea>
-                </div>
-
-                <button class="btn btn-block" id="btnAdicionarItem">Adicionar Item ao Pedido</button>
 
                 <div style="margin-top: 2rem;">
                     <h3>Itens Adicionados</h3>
                     <ul class="items-list" id="itensAdicionados">
-                        <li class="empty-state" style="list-style: none; padding: 2rem; text-align: center; color: var(--cor-cinza-claro);">
+                        <li class="empty-state" style="list-style: none; padding: 2rem; text-align: center; color: var(--text-muted);">
                             Nenhum item adicionado ainda
                         </li>
                     </ul>
@@ -80,7 +69,50 @@
             </div>
         </div>
     </div>
-    <script src="js/index.js"></script>
+
+    <!-- Modal de Acréscimos -->
+    <div id="modalAcrescimos" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Personalizar Pedido</h2>
+                <span class="modal-close" onclick="fecharModalAcrescimos()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="modalProdutoInfo"></div>
+                <div class="form-group">
+                    <label for="modalQuantidade">Quantidade:</label>
+                    <input type="number" id="modalQuantidade" min="1" value="1">
+                </div>
+                <div id="modalVariacaoContainer" style="display: none;">
+                    <div class="form-group">
+                        <label for="modalVariacao">Escolha a variação:</label>
+                        <select id="modalVariacao">
+                            <option value="">-- Selecione --</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="modalAcrescimosContainer" style="display: none;">
+                    <h3>Acréscimos — Escolha até 9 itens</h3>
+                    <div id="modalAcrescimosContador" style="margin-bottom: 1rem; color: var(--cor-amarelo); font-weight: 600;">
+                        Selecionados: 0 / 9
+                    </div>
+                    <div id="modalAcrescimosLista"></div>
+                </div>
+                <div class="form-group" style="margin-top: 1.5rem;">
+                    <label for="modalObservacao">Observação (opcional):</label>
+                    <textarea id="modalObservacao" placeholder="Ex: Sem cebola, bem passado..."></textarea>
+                </div>
+                <div id="modalTotal" style="margin-top: 1.5rem; padding: 1rem; background: var(--bg-secondary); border-radius: 8px; text-align: right;">
+                    <strong style="color: var(--cor-amarelo); font-size: 1.2rem;">Total: R$ 0,00</strong>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="fecharModalAcrescimos()">Cancelar</button>
+                <button class="btn" id="btnAdicionarModal">Adicionar ao Pedido</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/common.js"></script>
 </body>
 </html>
 

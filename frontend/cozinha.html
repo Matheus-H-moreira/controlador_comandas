@@ -9,13 +9,16 @@
 <body>
     <header>
         <h1 onclick="navigateTo('index.html')" style="cursor: pointer;">Senhoras Burguer - Cozinha 👨‍🍳</h1>
+        <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema" title="Alternar entre tema claro e escuro" type="button">
+            <span id="themeIcon">🌙</span>
+        </button>
     </header>
 
     <div class="container">
         <button class="btn btn-secondary" onclick="navigateTo('index.html')" style="margin-bottom: 1.5rem;">← Voltar</button>
         <div class="card">
             <h2>Fila de Pedidos</h2>
-            <p style="color: var(--cor-cinza-claro); margin-bottom: 1rem;">
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">
                 Gerencie os pedidos em andamento
             </p>
             <button class="btn" id="btnAtualizar" onclick="carregarPedidos()">🔄 Atualizar</button>
@@ -27,7 +30,7 @@
             </div>
         </div>
     </div>
-    <script src="js/index.js"></script>
+    <script src="js/common.js"></script>
 </body>
 </html>
 

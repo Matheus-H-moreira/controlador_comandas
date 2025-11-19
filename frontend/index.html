@@ -9,12 +9,15 @@
 <body>
     <header>
         <h1 onclick="navigateTo('index.html')" style="cursor: pointer;">Senhoras Burguer</h1>
+        <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema" title="Alternar entre tema claro e escuro" type="button">
+            <span id="themeIcon">🌙</span>
+        </button>
     </header>
 
     <div class="container">
         <div class="card" style="text-align: center; max-width: 800px; margin: 2rem auto;">
             <h2>Bem-vindo ao Sistema de Pedidos</h2>
-            <p style="color: var(--cor-cinza-claro); margin-top: 1rem;">
+            <p style="color: var(--text-muted); margin-top: 1rem;">
                 Selecione seu perfil para acessar o sistema
             </p>
         </div>
@@ -31,6 +34,6 @@
             </button>
         </div>
     </div>
-    <script src="js/index.js"></script>
+    <script src="js/common.js"></script>
 </body>
 </html>
