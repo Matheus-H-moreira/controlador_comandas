@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senhoras Burguer - Sistema de Pedidos</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1 onclick="navigateTo('index.html')" style="cursor: pointer;">Senhoras Burguer</h1>
+    </header>
+
+    <div class="container">
+        <div class="card" style="text-align: center; max-width: 800px; margin: 2rem auto;">
+            <h2>Bem-vindo ao Sistema de Pedidos</h2>
+            <p style="color: var(--cor-cinza-claro); margin-top: 1rem;">
+                Selecione seu perfil para acessar o sistema
+            </p>
+        </div>
+
+        <div class="profile-buttons">
+            <button class="profile-btn atendente" onclick="navigateTo('pedido.html')">
+                Atendente
+            </button>
+            <button class="profile-btn cozinha" onclick="navigateTo('cozinha.html')">
+                Cozinha
+            </button>
+            <button class="profile-btn caixa" onclick="navigateTo('caixa.html')">
+                Caixa
+            </button>
+        </div>
+    </div>
+    <script src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caixa - Senhoras Burguer</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1 onclick="navigateTo('index.html')" style="cursor: pointer;">Senhoras Burguer - Caixa 💰</h1>
+    </header>
+
+    <div class="container">
+        <button class="btn btn-secondary" onclick="navigateTo('index.html')" style="margin-bottom: 1.5rem;">← Voltar</button>
+        <div class="card">
+            <h2>Fechamento de Mesa</h2>
+            
+            <div class="form-group">
+                <label for="selectMesaCaixa">Selecione a Mesa:</label>
+                <select id="selectMesaCaixa">
+                    <option value="">-- Selecione uma mesa --</option>
+                </select>
+            </div>
+            
+            <div class="form-group" id="clienteGroup" style="display: none;">
+                <label for="selectClienteCaixa">Selecione o Cliente (opcional):</label>
+                <select id="selectClienteCaixa">
+                    <option value="">-- Pagar toda a mesa --</option>
+                </select>
+                <small style="color: var(--cor-cinza-claro); display: block; margin-top: 0.5rem;">
+                    Selecione um cliente para pagar apenas o consumo dele, ou deixe em branco para pagar toda a mesa.
+                </small>
+            </div>
+        </div>
+
+        <div id="resumoContainer"></div>
+    </div>
+    <script src="js/index.js"></script>
+</body>
+</html>
+

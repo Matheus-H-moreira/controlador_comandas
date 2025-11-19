@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atendente - Senhoras Burguer</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1 onclick="navigateTo('index.html')" style="cursor: pointer;">Senhoras Burguer - Atendente</h1>
+    </header>
+
+    <div class="container">
+        <button class="btn btn-secondary" onclick="navigateTo('index.html')" style="margin-bottom: 1.5rem;">← Voltar</button>
+        <div class="two-columns">
+            <div class="card">
+                <h2>Dados da Mesa</h2>
+                
+                <div class="form-group">
+                    <label for="selectMesa">Selecione a Mesa:</label>
+                    <select id="selectMesa">
+                        <option value="">-- Selecione uma mesa --</option>
+                    </select>
+                </div>
+
+                <div id="resumoMesaContainer"></div>
+
+                <div class="form-group">
+                    <label for="quantidadePessoas">Quantidade de Pessoas:</label>
+                    <input type="number" id="quantidadePessoas" min="1" max="20" placeholder="Ex: 2">
+                </div>
+
+                <div id="clientesContainer"></div>
+
+                <button class="btn btn-block" id="btnSalvarClientes">Salvar Clientes da Mesa</button>
+            </div>
+
+            <div class="card">
+                <h2>Montar Pedidos</h2>
+                
+                <div class="form-group">
+                    <label for="selectCliente">Cliente:</label>
+                    <select id="selectCliente">
+                        <option value="">-- Selecione um cliente --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="selectProduto">Produto:</label>
+                    <select id="selectProduto">
+                        <option value="">-- Selecione um produto --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="quantidadeProduto">Quantidade:</label>
+                    <input type="number" id="quantidadeProduto" min="1" value="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="observacao">Observação (opcional):</label>
+                    <textarea id="observacao" placeholder="Ex: Sem cebola, bem passado..."></textarea>
+                </div>
+
+                <button class="btn btn-block" id="btnAdicionarItem">Adicionar Item ao Pedido</button>
+
+                <div style="margin-top: 2rem;">
+                    <h3>Itens Adicionados</h3>
+                    <ul class="items-list" id="itensAdicionados">
+                        <li class="empty-state" style="list-style: none; padding: 2rem; text-align: center; color: var(--cor-cinza-claro);">
+                            Nenhum item adicionado ainda
+                        </li>
+                    </ul>
+                </div>
+
+                <button class="btn btn-success btn-block" id="btnEnviarPedidos" style="margin-top: 1rem;">
+                    Enviar Pedidos para Cozinha
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="js/index.js"></script>
+</body>
+</html>
+
