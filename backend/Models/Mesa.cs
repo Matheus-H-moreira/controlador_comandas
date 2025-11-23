@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace backend.Models
 {
     public class Mesa
@@ -7,6 +9,7 @@ namespace backend.Models
         public int QuantidadeClientes { get; set; }
         public string? StatusMesa { get; set; }
 
+        [JsonIgnore] 
         public List<Comanda>? Comandas { get; set; }
     }
 }

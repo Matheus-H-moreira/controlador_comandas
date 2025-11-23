@@ -5,7 +5,10 @@ namespace backend.Models
         public int Id { get; set; }
         public int MesaId { get; set; }
         public string? NomeCliente { get; set; }
-
+        public string? Status { get; set; }
+        
         public Mesa? Mesa { get; set; }
+        public List<ItensComanda>? ItensComanda { get; set; }
+
     }
 }

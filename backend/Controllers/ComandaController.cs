@@ -36,6 +36,28 @@ namespace backend.Controllers
             return Ok(comanda);
         }
 
+        [HttpGet("todos")]
+        public async Task<IActionResult> GetTodasComandas()
+        {
+            var comandas = await _context.Comandas
+                                         .Include(c => c.ItensComanda)
+                                         .ToListAsync();
+            return Ok(comandas);
+        }
+
+        [HttpPut("finalizar/{id}")]
+        public async Task<IActionResult> FinalizarComanda(int id)
+        {
+            var comanda = await _context.Comandas.FindAsync(id);
+            if (comanda == null)
+                return NotFound();
+
+            comanda.Status = "Pronto";
+            await _context.SaveChangesAsync();
+
+            return Ok(comanda);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CriarComanda(Comanda comanda)
         {
@@ -43,6 +65,18 @@ namespace backend.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetComanda), new { id = comanda.Id }, comanda);
+        }
+
+        [HttpPost("lote")]
+        public async Task<IActionResult> CriarComandasEmLote(List<Comanda> comandas)
+        {
+            if (comandas == null || comandas.Count == 0)
+                return BadRequest(new { message = "Nenhuma comanda enviada" });
+
+            _context.Comandas.AddRange(comandas);
+            await _context.SaveChangesAsync();
+
+            return Ok(comandas);
         }
 
         [HttpDelete("{id}")]

@@ -47,7 +47,7 @@ namespace backend.Controllers
             var produto = await _context.Produtos.FindAsync(id);
 
             if(produto == null)
-                return NotFound(new { message = "Mesa não encontrada" });
+                return NotFound(new { message = "Produto não encontrada" });
 
             produto.NomeProduto = produtoAtualizado.NomeProduto;
             produto.Preco = produtoAtualizado.Preco;
@@ -61,12 +61,12 @@ namespace backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletarProduto(int id)
         {
-            var produto = await _context.ItensComanda.FindAsync(id);
+            var produto = await _context.Produtos.FindAsync(id);
 
             if (produto == null)
                 return NotFound();
 
-            _context.ItensComanda.Remove(produto);
+            _context.Produtos.Remove(produto);
             await _context.SaveChangesAsync();
 
             return NoContent();

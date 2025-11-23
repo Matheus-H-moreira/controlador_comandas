@@ -6,5 +6,6 @@ namespace backend.Models
         public string? NomeProduto { get; set; }
         public decimal Preco { get; set; }
         public string? Categoria { get; set; }
+        
     }
 }
