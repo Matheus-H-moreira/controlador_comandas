@@ -256,6 +256,10 @@ header h1::before {
     content: '💰';
 }
 
+.profile-btn.admin::before {
+    content: '⚙️';
+}
+
 .form-group {
     margin-bottom: 1.5rem;
 }
