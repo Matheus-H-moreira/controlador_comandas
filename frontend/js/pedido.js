@@ -1,6 +1,6 @@
-const apiProdutos = "http://localhost:5000/api/Produto";
-const apiMesas = "http://localhost:5000/api/Mesa";
-const apiComandas = "http://localhost:5000/api/Comandas";
+const apiProdutos = "http://192.168.5.179:5000/api/Produto";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
+const apiMesas = "http://192.168.5.179:5000/api/Mesa";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
+const apiComandas = "http://192.168.5.179:5000/api/Comandas";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
 
 let clientes = [];
 let clienteSelecionado = null;
@@ -53,9 +53,6 @@ async function carregarMesas() {
     }
 }
 
-/* ---------------------------------------
-   ✔ 1. Carregar clientes automaticamente ao trocar a mesa
-------------------------------------------*/
 document.getElementById("selectMesa").addEventListener("change", carregarClientesDaMesa);
 
 async function carregarClientesDaMesa() {
@@ -73,10 +70,6 @@ async function carregarClientesDaMesa() {
 
     atualizarSelectCliente();
 }
-
-/* -----------------------------------------
-   Parte de cadastrar clientes manualmente
-------------------------------------------*/
 
 document.getElementById("quantidadePessoas").addEventListener("input", () => {
     const qtd = parseInt(document.getElementById("quantidadePessoas").value) || 0;
@@ -133,10 +126,6 @@ document.getElementById("btnSalvarClientes").addEventListener("click", async () 
     atualizarSelectCliente();
 });
 
-/* ---------------------------------------
-   ✔ 3. atualizarSelectCliente CORRIGIDO
-------------------------------------------*/
-
 function atualizarSelectCliente() {
     const select = document.getElementById("selectCliente");
     select.innerHTML = '<option value="">-- Selecione um cliente --</option>';
@@ -154,9 +143,6 @@ document.getElementById("selectCliente").addEventListener("change", e => {
     atualizarItensAdicionados();
 });
 
-/* -----------------------------------------
-   Itens adicionados
-------------------------------------------*/
 
 function atualizarItensAdicionados() {
     const ul = document.getElementById("itensAdicionados");
@@ -175,10 +161,6 @@ function atualizarItensAdicionados() {
         ul.appendChild(li);
     });
 }
-
-/* -----------------------------------------
-   Modal de produto
-------------------------------------------*/
 
 function abrirModalProduto(id, nomeProduto, preco) {
     const modal = document.getElementById("modalAcrescimos");
@@ -227,7 +209,7 @@ document.getElementById("btnEnviarPedidos").addEventListener("click", async () =
             if (!cliente.pedidos.length) continue;
 
             for (let item of cliente.pedidos) {
-                await fetch("http://localhost:5000/api/ItensComanda", {
+                await fetch("http://192.168.5.179:5000/api/ItensComanda", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
