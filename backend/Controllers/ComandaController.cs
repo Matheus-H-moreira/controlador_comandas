@@ -15,6 +15,21 @@ namespace backend.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Listar([FromQuery] int? mesaId)
+        {
+            if (mesaId.HasValue)
+            {
+                var lista = await _context.Comandas
+                    .Where(c => c.MesaId == mesaId)
+                    .ToListAsync();
+
+                return Ok(lista);
+            }
+
+            return Ok(await _context.Comandas.ToListAsync());
+        }
+
         [HttpGet("mesa/{mesaId}")]
         public async Task<IActionResult> GetComandasDaMesa(int mesaId)
         {
@@ -52,21 +67,29 @@ namespace backend.Controllers
             if (comanda == null)
                 return NotFound();
 
-            comanda.Status = "Pronto";
+            comanda.Status = "pronto";
             await _context.SaveChangesAsync();
 
             return Ok(comanda);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CriarComanda(Comanda comanda)
+        public async Task<IActionResult> CriarComanda([FromBody] Comanda comanda)
         {
+            var existente = await _context.Comandas
+                .FirstOrDefaultAsync(c =>
+                    c.MesaId == comanda.MesaId &&
+                    c.NomeCliente == comanda.NomeCliente);
+
+            if (existente != null)
+                return Conflict(new { message = "Já existe uma comanda para esse cliente nesta mesa." });
+
             _context.Comandas.Add(comanda);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetComanda), new { id = comanda.Id }, comanda);
         }
-
+        
         [HttpPost("lote")]
         public async Task<IActionResult> CriarComandasEmLote(List<Comanda> comandas)
         {

@@ -11,7 +11,7 @@ using backend.Data;
 namespace restauranteAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251123194514_InitialCreate")]
+    [Migration("20251124141141_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -62,9 +62,6 @@ namespace restauranteAPI.Migrations
                     b.Property<string>("ItemPedido")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("ItensComandaId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("PrecoItem")
                         .HasColumnType("decimal(65,30)");
 
@@ -74,8 +71,6 @@ namespace restauranteAPI.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ComandaId");
-
-                    b.HasIndex("ItensComandaId");
 
                     b.ToTable("ItensComanda");
                 });
@@ -143,21 +138,12 @@ namespace restauranteAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("backend.Models.ItensComanda", null)
-                        .WithMany("Itens")
-                        .HasForeignKey("ItensComandaId");
-
                     b.Navigation("Comanda");
                 });
 
             modelBuilder.Entity("backend.Models.Comanda", b =>
                 {
                     b.Navigation("ItensComanda");
-                });
-
-            modelBuilder.Entity("backend.Models.ItensComanda", b =>
-                {
-                    b.Navigation("Itens");
                 });
 
             modelBuilder.Entity("backend.Models.Mesa", b =>

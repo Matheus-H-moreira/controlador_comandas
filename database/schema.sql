@@ -9,7 +9,7 @@ CREATE TABLE  IF NOT EXISTS Comandas(
     Id INT PRIMARY KEY AUTO_INCREMENT,
     MesaId INT NOT NULL,
     NomeCliente VARCHAR(100) NOT NULL,
-    Status ENUM('em_preparo', 'pronto') NOT NULL DEFAULT 'em_preparo'
+    Status ENUM('em_preparo', 'pronto') NOT NULL DEFAULT 'em_preparo',
 
     FOREIGN KEY (MesaId) REFERENCES Mesas(Id) ON DELETE CASCADE
 );

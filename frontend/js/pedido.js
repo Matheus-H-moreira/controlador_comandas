@@ -14,8 +14,6 @@ async function carregarCardapio() {
         const data = await res.json();
         const produtos = Array.isArray(data) ? data : data.$values || [];
 
-        console.log("Produtos recebidos:", produtos);
-
         if (!produtos.length) {
             container.innerHTML = "<p class='empty-state'>Nenhum produto encontrado.</p>";
             return;
@@ -43,8 +41,6 @@ async function carregarMesas() {
         const data = await res.json();
         const mesas = Array.isArray(data) ? data : data.$values || [];
 
-        console.log("Mesas recebidas:", mesas);
-
         mesas.forEach(mesa => {
             const option = document.createElement("option");
             option.value = mesa.id;
@@ -57,11 +53,37 @@ async function carregarMesas() {
     }
 }
 
+/* ---------------------------------------
+   ✔ 1. Carregar clientes automaticamente ao trocar a mesa
+------------------------------------------*/
+document.getElementById("selectMesa").addEventListener("change", carregarClientesDaMesa);
+
+async function carregarClientesDaMesa() {
+    const mesaId = document.getElementById("selectMesa").value;
+    if (!mesaId) return;
+
+    const res = await fetch(`${apiComandas}?mesaId=${mesaId}`);
+    const comandas = await res.json();
+
+    clientes = comandas.map(c => ({
+        nome: c.nomeCliente,
+        id: c.id,
+        pedidos: []
+    }));
+
+    atualizarSelectCliente();
+}
+
+/* -----------------------------------------
+   Parte de cadastrar clientes manualmente
+------------------------------------------*/
+
 document.getElementById("quantidadePessoas").addEventListener("input", () => {
     const qtd = parseInt(document.getElementById("quantidadePessoas").value) || 0;
     const container = document.getElementById("clientesContainer");
     container.innerHTML = "";
     clientes = [];
+
     for (let i = 0; i < qtd; i++) {
         const div = document.createElement("div");
         div.className = "form-group";
@@ -82,35 +104,47 @@ document.getElementById("btnSalvarClientes").addEventListener("click", async () 
     }
 
     const inputs = clientes.map((_, i) => document.getElementById(`cliente-${i}`).value.trim());
-    const novasComandas = inputs.map(nome => ({ MesaId: mesaId, NomeCliente: nome }));
+    const resList = await fetch(`${apiComandas}?mesaId=${mesaId}`);
+    const comandasExistentes = await resList.json();
 
-    for (let comanda of novasComandas) {
+    for (let nome of inputs) {
+        let encontrada = comandasExistentes.find(c => c.nomeCliente === nome);
+
+        if (encontrada) {
+            clientes.push({ nome, id: encontrada.id, pedidos: [] });
+            continue;
+        }
+
         const res = await fetch(apiComandas, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(comanda)
+            body: JSON.stringify({ mesaId, nomeCliente: nome })
         });
-        const data = await res.json();
-        const vazio = clientes.find(c => !c.id);
-        if (vazio) {
-            vazio.nome = data.NomeCliente || data.nomeCliente || "";
-            vazio.id = data.Id || data.id;
-            vazio.pedidos = [];
+
+        if (res.status === 409) {
+            alert(`Já existe uma comanda para ${nome} nessa mesa`);
+            continue;
         }
+
+        const data = await res.json();
+        clientes.push({ nome: data.nomeCliente, id: data.id, pedidos: [] });
     }
 
     atualizarSelectCliente();
 });
 
+/* ---------------------------------------
+   ✔ 3. atualizarSelectCliente CORRIGIDO
+------------------------------------------*/
+
 function atualizarSelectCliente() {
     const select = document.getElementById("selectCliente");
-    select.innerHTML = `<option value="">-- Selecione um cliente --</option>`;
+    select.innerHTML = '<option value="">-- Selecione um cliente --</option>';
+
     clientes.forEach(c => {
-        const option = document.createElement("option");
-        option.value = c.id;
-        option.textContent = c.nome;
-        select.appendChild(option);
+        select.innerHTML += `<option value="${c.id}">${c.nome}</option>`;
     });
+
     atualizarItensAdicionados();
 }
 
@@ -119,6 +153,10 @@ document.getElementById("selectCliente").addEventListener("change", e => {
     clienteSelecionado = clientes.find(c => c.id === id);
     atualizarItensAdicionados();
 });
+
+/* -----------------------------------------
+   Itens adicionados
+------------------------------------------*/
 
 function atualizarItensAdicionados() {
     const ul = document.getElementById("itensAdicionados");
@@ -137,6 +175,10 @@ function atualizarItensAdicionados() {
         ul.appendChild(li);
     });
 }
+
+/* -----------------------------------------
+   Modal de produto
+------------------------------------------*/
 
 function abrirModalProduto(id, nomeProduto, preco) {
     const modal = document.getElementById("modalAcrescimos");

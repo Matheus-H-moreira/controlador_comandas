@@ -25,17 +25,16 @@ async function carregarPedidos() {
             const dataItens = await resItens.json();
             const itens = dataItens.$values || dataItens;
 
+            if (!itens.length) continue;
+
             let itensHTML = "";
             let total = 0;
 
-            if (itens.length) {
-                itensHTML = itens.map(i => {
-                    total += i.precoItem * i.quantidadeItem;
-                    return `<li>${i.itemPedido} - ${i.quantidadeItem}x - R$ ${(i.precoItem * i.quantidadeItem).toFixed(2)}</li>`;
-                }).join("");
-            } else {
-                itensHTML = `<li class="empty-state" style="list-style:none; color: var(--text-muted);">Nenhum item ainda</li>`;
-            }
+            itensHTML = itens.map(i => {
+                total += i.precoItem * i.quantidadeItem;
+                return `<li>${i.itemPedido} - ${i.quantidadeItem}x - R$ ${(i.precoItem * i.quantidadeItem).toFixed(2)}</li>`;
+            }).join("");
+
 
             const card = document.createElement("div");
             card.className = "card";
@@ -61,7 +60,7 @@ async function carregarPedidos() {
                         return;
                     }
 
-                    card.remove(); 
+                    card.remove();
                     console.log(`Pedido ${comanda.id} finalizado com sucesso.`);
 
                 } catch (e) {
@@ -82,6 +81,6 @@ window.onload = () => {
     carregarPedidos();
     const btnAtualizar = document.getElementById("btnAtualizar");
     if (btnAtualizar) {
-        btnAtualizar.onclick = carregarPedidos; 
+        btnAtualizar.onclick = carregarPedidos;
     }
 };

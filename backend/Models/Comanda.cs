@@ -9,6 +9,5 @@ namespace backend.Models
         
         public Mesa? Mesa { get; set; }
         public List<ItensComanda>? ItensComanda { get; set; }
-
     }
 }

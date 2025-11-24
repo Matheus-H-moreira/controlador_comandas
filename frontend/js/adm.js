@@ -18,32 +18,28 @@ async function carregarProdutos() {
         }
 
         container.innerHTML = `
-            <table class="tabela">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                        <th>Categoria</th>
-                        <th>Preço</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${produtos.map(p => `
-                        <tr>
-                            <td>${p.id}</td>
-                            <td><input value="${p.nomeProduto}" id="nome-${p.id}"></td>
-                            <td><input value="${p.categoria}" id="categoria-${p.id}"></td>
-                            <td><input type="number" step="0.01" value="${p.preco}" id="preco-${p.id}"></td>
-                            <td>
-                                <button class="btn btn-success" onclick="editarProduto(${p.id})">Salvar</button>
-                                <button class="btn btn-danger" onclick="deletarProduto(${p.id})">Excluir</button>
-                            </td>
-                        </tr>
-                    `).join("")}
-                </tbody>
-            </table>
-        `;
+            <div class="card-grid">
+                ${produtos.map(p => `
+                    <div class="adm-card">
+                        <h3>Produto #${p.id}</h3>
+
+                        <label>Nome</label>
+                        <input value="${p.nomeProduto}" id="nome-${p.id}">
+
+                        <label>Categoria</label>
+                        <input value="${p.categoria}" id="categoria-${p.id}">
+
+                        <label>Preço</label>
+                        <input type="number" step="0.01" value="${p.preco}" id="preco-${p.id}">
+
+                        <div class="card-actions">
+                            <button class="btn btn-success" onclick="editarProduto(${p.id})">Salvar</button>
+                            <button class="btn btn-danger" onclick="deletarProduto(${p.id})">Excluir</button>
+                        </div>
+                    </div>
+                `).join("")}
+            </div>`;
+
     } catch (e) {
         console.error("Erro ao carregar produtos:", e);
         container.innerHTML = "<p class='empty-state'>Erro ao carregar produtos.</p>";
@@ -127,37 +123,31 @@ async function carregarMesas() {
         }
 
         container.innerHTML = `
-            <table class="tabela">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Número</th>
-                        <th>Quantidade de Clientes</th>
-                        <th>Status</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${mesas.map(m => `
-                        <tr>
-                            <td>${m.id}</td>
-                            <td><input type="number" value="${m.numeroMesa}" id="numero-${m.id}"></td>
-                            <td><input type="number" value="${m.quantidadeClientes}" id="quantidade-${m.id}"></td>
-                            <td>
-                                <select id="status-${m.id}">
-                                    <option value="livre" ${m.statusMesa === 'livre' ? 'selected' : ''}>Livre</option>
-                                    <option value="ocupada" ${m.statusMesa === 'ocupada' ? 'selected' : ''}>Ocupada</option>
-                                </select>
-                            </td>
-                            <td>
-                                <button class="btn btn-success" onclick="editarMesa(${m.id})">Salvar</button>
-                                <button class="btn btn-danger" onclick="deletarMesa(${m.id})">Excluir</button>
-                            </td>
-                        </tr>
-                    `).join("")}
-                </tbody>
-            </table>
-        `;
+        <div class="card-grid">
+            ${mesas.map(m => `
+                <div class="adm-card">
+                    <h3>Mesa #${m.id}</h3>
+
+                    <label>Número da Mesa</label>
+                    <input type="number" value="${m.numeroMesa}" id="numero-${m.id}">
+
+                    <label>Qtd. Clientes</label>
+                    <input type="number" value="${m.quantidadeClientes}" id="quantidade-${m.id}">
+
+                    <label>Status</label>
+                    <select id="status-${m.id}">
+                        <option value="livre" ${m.statusMesa === 'livre' ? 'selected' : ''}>Livre</option>
+                        <option value="ocupada" ${m.statusMesa === 'ocupada' ? 'selected' : ''}>Ocupada</option>
+                    </select>
+
+                    <div class="card-actions">
+                        <button class="btn btn-success" onclick="editarMesa(${m.id})">Salvar</button>
+                        <button class="btn btn-danger" onclick="deletarMesa(${m.id})">Excluir</button>
+                    </div>
+                </div>
+            `).join("")}
+        </div>`;
+
     } catch (e) {
         console.error("Erro ao carregar mesas:", e);
         container.innerHTML = "<p class='empty-state'>Erro ao carregar mesas.</p>";
