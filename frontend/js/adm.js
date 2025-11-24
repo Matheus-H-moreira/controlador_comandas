@@ -1,5 +1,5 @@
-const apiProdutos = "http://192.168.5.179:5000/api/Produto";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
-const apiMesas = "http://192.168.5.179:5000/api/Mesa";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
+const apiProdutos = "http://172.20.10.2:5000/api/Produto";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
+const apiMesas = "http://172.20.10.2:5000/api/Mesa";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
 
 async function carregarProdutos() {
     const container = document.getElementById("produtosContainer");

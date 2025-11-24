@@ -1,6 +1,6 @@
-const apiMesas = "http://192.168.5.179:5000/api/Mesa";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
-const apiComandas = "http://192.168.5.179:5000/api/Comandas/mesa"; //mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
-const apiItensComanda = "http://192.168.5.179:5000/api/ItensComanda/comanda";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
+const apiMesas = "http://172.20.10.2:5000/api/Mesa";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
+const apiComandas = "http://172.20.10.2:5000/api/Comandas/mesa"; //mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
+const apiItensComanda = "http://172.20.10.2:5000/api/ItensComanda/comanda";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
 
 let clientes = [];
 let mesaSelecionada = null;
@@ -127,10 +127,10 @@ async function fecharPagamento() {
 
     try {
         if (clienteSelecionado) {
-            await fetch(`http://192.168.5.179:5000/api/Comandas/${clienteSelecionado.id}`, { method: "DELETE" });
+            await fetch(`http://172.20.10.2:5000/api/Comandas/${clienteSelecionado.id}`, { method: "DELETE" });
         } else {
             for (let c of clientes) {
-                await fetch(`http://192.168.5.179:5000/api/Comandas/${c.id}`, { method: "DELETE" });
+                await fetch(`http://172.20.10.2:5000/api/Comandas/${c.id}`, { method: "DELETE" });
             }
         }
 

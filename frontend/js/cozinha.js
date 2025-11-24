@@ -1,5 +1,5 @@
-const apiComandas = "http://192.168.5.179:5000/api/Comandas/todos"; //mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
-const apiItensComanda = "http://192.168.5.179:5000/api/ItensComanda/comanda";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
+const apiComandas = "http://172.20.10.2:5000/api/Comandas/todos"; //mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
+const apiItensComanda = "http://172.20.10.2:5000/api/ItensComanda/comanda";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
 
 async function carregarPedidos() {
     const container = document.getElementById("pedidosContainer");
@@ -49,7 +49,7 @@ async function carregarPedidos() {
 
             card.querySelector(".btn-finalizar").addEventListener("click", async () => {
                 try {
-                    const res = await fetch(`http://192.168.5.179:5000/api/Comandas/finalizar/${comanda.id}`, {
+                    const res = await fetch(`http://172.20.10.2:5000/api/Comandas/finalizar/${comanda.id}`, {
                         method: "PUT",
                         headers: { "Content-Type": "application/json" }
                     });

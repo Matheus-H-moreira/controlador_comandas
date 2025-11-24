@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace restauranteAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class Inicial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,6 +57,8 @@ namespace restauranteAPI.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     MesaId = table.Column<int>(type: "int", nullable: false),
                     NomeCliente = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Status = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -81,8 +83,7 @@ namespace restauranteAPI.Migrations
                     ItemPedido = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     QuantidadeItem = table.Column<int>(type: "int", nullable: false),
-                    PrecoItem = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    ItensComandaId = table.Column<int>(type: "int", nullable: true)
+                    PrecoItem = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -93,11 +94,6 @@ namespace restauranteAPI.Migrations
                         principalTable: "Comandas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ItensComanda_ItensComanda_ItensComandaId",
-                        column: x => x.ItensComandaId,
-                        principalTable: "ItensComanda",
-                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -110,11 +106,6 @@ namespace restauranteAPI.Migrations
                 name: "IX_ItensComanda_ComandaId",
                 table: "ItensComanda",
                 column: "ComandaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ItensComanda_ItensComandaId",
-                table: "ItensComanda",
-                column: "ItensComandaId");
         }
 
         /// <inheritdoc />

@@ -11,7 +11,7 @@ using backend.Data;
 namespace restauranteAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251124141141_InitialCreate")]
+    [Migration("20251124195435_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

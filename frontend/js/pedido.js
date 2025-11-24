@@ -1,6 +1,6 @@
-const apiProdutos = "http://192.168.5.179:5000/api/Produto";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
-const apiMesas = "http://192.168.5.179:5000/api/Mesa";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
-const apiComandas = "http://192.168.5.179:5000/api/Comandas";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
+const apiProdutos = "http://172.20.10.2:5000/api/Produto";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
+const apiMesas = "http://172.20.10.2:5000/api/Mesa";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
+const apiComandas = "http://172.20.10.2:5000/api/Comandas";//mudar isso dependendo do wifi que estiver usando, só ir no cmd e digitar ipconfig e pegar o ipv4
 
 let clientes = [];
 let clienteSelecionado = null;
@@ -209,7 +209,7 @@ document.getElementById("btnEnviarPedidos").addEventListener("click", async () =
             if (!cliente.pedidos.length) continue;
 
             for (let item of cliente.pedidos) {
-                await fetch("http://192.168.5.179:5000/api/ItensComanda", {
+                await fetch("http://172.20.10.2:5000/api/ItensComanda", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
